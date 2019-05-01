@@ -32,8 +32,8 @@ const start = () =>{
   .prompt([{
     type: "list",
     name: "choices",
-    choices: ["View Products for Sale","View Low Inventory","Add to Inventory","Add New Product"]
-  }
+    choices: ["Add New Product","View Products for Sale","View Low Inventory","Add to Inventory"]
+  },
 ]).then(function(response){
   choiceId = parseInt(response.choices); //converts values into Integer equivalents
   let input = response.choices
@@ -152,59 +152,31 @@ const addNewProduct = ()=>{
       type: "input",
       name:"product",
       message: "Enter New Product Name"
-  }
+  },
+  {
+    type: "input",
+    name:"department",
+    message: "Enter New Department Name"
+  },
+  {
+    type: "input",
+    name:"price",
+    message: "Enter New Price"
+},
+{
+  type: "input",
+  name:"stocks",
+  message: "Enter New Stock Quantity"
+}
 ]).then(function (response){
   // console.log(response.product)
   pName = response.product;
-  // console.log(pName);
-  addNewDepartment()
+  dName = response.department;
+  price = response.price;
+  sQuantity = response.stocks
+  insertNewProduct();
 });
-}
-const addNewDepartment = () => {
-  inquirer
-  .prompt([
-    {
-      type: "input",
-      name:"department",
-      message: "Enter New Department Name"
-    }
 
-  ]).then(function (response){
-    // console.log(response.department);
-    dName = response.department;
-    // console.log(dName)
-    addNewPrice();
-  });
-}
-
-const addNewPrice = () => {
-  inquirer
-  .prompt([
-    {
-      type: "input",
-      name:"price",
-      message: "Enter New Price"
-  }
-  ]).then(function (response){
-    price = response.price;
-    // console.log(price)
-    addNewStock();
-  });
-}
-const addNewStock = ()=> {
-  inquirer
-  .prompt([
-    {
-      type: "input",
-      name:"stocks",
-      message: "Enter New Stock Quantity"
-  }
-  ]).then(function (response){
-    // console.log(response.stocks)
-    sQuantity = response.stocks
-    // console.log(sQuantity);
-    insertNewProduct();
-  });
 }
 const insertNewProduct = () => {
 console.log("Inserting New Table")
